@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rock - Paper - Scissors</title>
+    <style>
+       
+        body {
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #74ebd5 0%, #acb6e5 100%);
+            height: 100vh;
+            font-family: 'Poppins', sans-serif;
+            color: #ffffff;
+        }
+        h1 {
+            font-size: 4rem;
+            margin-bottom: 40px;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+        }
+        .choices {
+            margin-bottom: 40px;
+        }
+        .choices button {
+            font-size: 6rem;
+            padding: 20px;
+            margin: 0 15px;
+            border-radius: 50%;
+            background-color: #ff6b6b;
+            border: none;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+            cursor: pointer;
+            transition: transform 0.3s, background-color 0.3s, box-shadow 0.3s;
+        }
+        .choices button:hover {
+            transform: scale(1.1);
+            background-color: #ff3b3b;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+        #playerDisplay, #computerDisplay {
+            font-size: 2.5rem;
+            margin: 20px 0;
+            text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.3);
+        }
+        #resultDisplay {
+            font-size: 4rem;
+            margin: 40px 0;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+        }
+        .scoreDisplay {
+            font-size: 2rem;
+            margin: 10px 0;
+            text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.3);
+        }
+        #playerscoredisplay, #computerscoredisplay {
+            font-weight: bold;
+            color: #ff6b6b;
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.3);
+        }
+    </style>
+</head>
+<body>
+    <h1>Rock - Paper - Scissors</h1>
+    <div class="choices">
+        <button onclick="playGame('rock')">✊</button>
+        <button onclick="playGame('paper')">✋</button>
+        <button onclick="playGame('scissor')">✌️</button>
+    </div>
+    <div id="playerDisplay">Player: </div>
+    <div id="computerDisplay">Computer: </div>
+    <div id="resultDisplay">IT'S A TIE: </div>
+
+    <div class="scoreDisplay">Player Score:
+        <span id="playerscoredisplay">0</span>
+    </div>
+    <div class="scoreDisplay">Computer Score:
+        <span id="computerscoredisplay">0</span>
+    </div>
+    <script>
+        const choices = ["rock", "paper", "scissor"];
+        const playerDisplay = document.getElementById("playerDisplay");
+        const computerDisplay = document.getElementById("computerDisplay");
+        const resultDisplay = document.getElementById("resultDisplay");
+        const playerscoredisplay = document.getElementById("playerscoredisplay");
+        const computerscoredisplay = document.getElementById("computerscoredisplay");
+        let playerScore = 0;
+        let computerScore = 0;
+
+        function playGame(playerChoice) {
+            const computerChoice = choices[Math.floor(Math.random() * 3)];
+            let result = "";
+
+            if (playerChoice === computerChoice) {
+                result = "IT'S A TIE";
+            } else {
+                switch (playerChoice) {
+                    case "rock":
+                        result = (computerChoice === 'scissor') ? "YOU WIN!" : "YOU LOSE";
+                        break;
+                    case "paper":
+                        result = (computerChoice === 'rock') ? "YOU WIN!" : "YOU LOSE";
+                        break;
+                    case "scissor":
+                        result = (computerChoice === 'paper') ? "YOU WIN!" : "YOU LOSE";
+                        break;
+                }
+            }
+            playerDisplay.textContent = `Player: ${playerChoice}`;
+            computerDisplay.textContent = `Computer: ${computerChoice}`;
+            resultDisplay.textContent = result;
+
+            switch (result) {
+                case "YOU WIN!":
+                    playerScore++;
+                    playerscoredisplay.textContent = playerScore;
+                    break;
+                case "YOU LOSE":
+                    computerScore++;
+                    computerscoredisplay.textContent = computerScore;
+                    break;
+            }
+        }
+    </script>
+</body>
+</html>
